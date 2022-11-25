@@ -1,32 +1,33 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import AddtaskButton from "../components/AddtaskButton";
-import { useNavigation } from "@react-navigation/native";
 import TextEntry from "../components/TextEntry";
 import { Ionicons } from "@expo/vector-icons";
-import {useSelector, useDispatch} from "react-redux"
-import {addTask} from '../redux/features/tasks/tasks'
+import { useSelector, useDispatch } from "react-redux";
+import { addTask } from "../redux/features/tasks/tasks";
+import { useNavigation } from "@react-navigation/native";
+import uuid from "react-native-uuid";
 const Home = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const [taskTitle,setTaskTitle] = useState("")
-  const [taskDescription,setTaskDescription] = useState("")
+  const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
 
-  function addNewTask(){
+  function addNewTask() {
     const newTask = {
-      id:1,  
+      id: uuid.v4(),
       title: taskTitle,
       description: taskDescription,
       date: "",
       location: "",
       priority: "",
       status: "pending",
-    }
-    dispatch(addTask(newTask))
+    };
+    dispatch(addTask(newTask));
     setTaskDescription("");
     setTaskTitle("");
-
+    navigation.navigate("TopNavigator");
   }
 
   return (
@@ -57,18 +58,29 @@ const Home = () => {
             onChangeText={setTaskDescription}
           />
           <View className=" flex-row  justify-around mt-5 pr-5">
-            <Pressable android_ripple={{ color: "cyan" }}>
-              <Ionicons name="md-timer" size={24} color="orange" />
-            </Pressable>
-            <Pressable>
-              <Ionicons name="location" size={24} color="orange" />
-            </Pressable>
-            <Pressable>
-              <Ionicons name="flag" size={24} color="orange" />
-            </Pressable>
+            <Ionicons
+              name="md-timer"
+              size={24}
+              color="orange"
+              onPress={() => console.log("none")}
+            />
+
+            <Ionicons
+              name="location"
+              size={24}
+              color="orange"
+              onPress={() => console.log("none")}
+            />
+
+            <Ionicons
+              name="flag"
+              size={24}
+              color="orange"
+              onPress={() => console.log("none")}
+            />
           </View>
         </View>
-        <AddtaskButton title={"Create task"} onPress={addNewTask}/>
+        <AddtaskButton title={"Create task"} onPress={addNewTask} />
       </View>
     </View>
   );

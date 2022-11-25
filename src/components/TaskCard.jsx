@@ -5,13 +5,10 @@ const TaskCard = ({ item }) => {
   const [select, setSelected] = React.useState(false);
   return (
     <View className=" flex-row justify-start m-5">
-      <View className=" mr-5 ">
-        <CheckBox checked={select} onChange={() => setSelected(!select)}>
-          {select ? "Done" : "Pending"}
-        </CheckBox>
-      </View>
+      <View className=" mr-5 "></View>
       <View className="flex">
         <Text
+          onPress={() => setSelected(!select)}
           className={
             select
               ? " text-xl  text-gray-600 dark:text-gray-400 line-through"
